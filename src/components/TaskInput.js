@@ -10,7 +10,6 @@ import {
     FormGroup,
     Label,
     Input,
-    FormText
 } from "reactstrap";
 
 const TaskInput = () => {
@@ -25,7 +24,6 @@ const TaskInput = () => {
             tasks.push({
                 name: newTask,
                 priority: newPriority,
-                isCompleted: false,
                 description: ""
             });
             setTaskList(tasks);
@@ -62,9 +60,9 @@ const TaskInput = () => {
                         <option selected disabled>
                             Select Priority
                         </option>
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
+                        <option value="acil">Acil</option>
+                        <option value="onemli">Önemli</option>
+                        <option value="normal">Normal</option>
                     </Input></Col>
                     <Col sm={2} ><Button color="primary" onClick={addTask}>
                         +Create

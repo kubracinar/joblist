@@ -8,7 +8,6 @@ import {
     FormGroup,
     Label,
     Input,
-    FormText
 } from "reactstrap";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -16,19 +15,14 @@ const TaskDetail = () => {
     const [tasks, setTasks] = useRecoilState(taskListArray);
     const history = useHistory();
     const { id } = useParams();
-    const [content, setContent] = useState(tasks[id].description);
     const [title, setTitle] = useState(tasks[id].name);
     const [prior, setPrior] = useState(tasks[id].priority);
-    const [status, setStatus] = useState(tasks[id].isCompleted);
 
     const update = (event) => {
         const list = [...tasks];
         list[id] = {
             ...list[id],
-            name: title,
             priority: prior,
-            isCompleted: status,
-            description: content
         };
         setTasks(list);
         history.push("/");
@@ -53,7 +47,7 @@ const TaskDetail = () => {
                             name="taskTitle"
                             id="taskTitle"
                             value={title}
-                            onChange={(event) => setTitle(event.target.value)}
+                            disabled
                         />
                     </Col>
                 </FormGroup>
@@ -68,59 +62,16 @@ const TaskDetail = () => {
                             id="selectPriority"
                             onChange={(event) => setPrior(event.target.value)}
                         >
-                            <option value="low" selected={prior === "low"}>
-                                low
+                            <option value="acil" selected={prior === "acil"}>
+                                Acil
                             </option>
-                            <option value="medium" selected={prior === "medium"}>
-                                medium
+                            <option value="onemli" selected={prior === "onemli"}>
+                                Önemli
                             </option>
-                            <option value="high" selected={prior === "high"}>
-                                high
+                            <option value="normal" selected={prior === "normal"}>
+                                Normal
                             </option>
                         </Input>
-                    </Col>
-                </FormGroup>
-                <br />
-                <FormGroup row>
-                    <Col sm={6}>
-                        <FormGroup check inline>
-                            <Label check>
-                                <Input
-                                    type="radio"
-                                    name="completed"
-                                    checked={status}
-                                    onChange={() => setStatus(true)}
-                                />{" "}
-                                Completed
-                            </Label>
-                        </FormGroup>
-                        &nbsp;
-                        <FormGroup check inline>
-                            <Label check>
-                                <Input
-                                    type="radio"
-                                    name="completed"
-                                    checked={!status}
-                                    onChange={() => setStatus(false)}
-                                />{" "}
-                                Not Yet
-                            </Label>
-                        </FormGroup>
-                    </Col>
-                </FormGroup>
-                <FormGroup row>
-                    <Label for="exampleText" sm={2}>
-                        Description :
-                    </Label>
-                    <Col sm={5}>
-                        <Input
-                            type="textarea"
-                            name="description"
-                            id="description"
-                            rows="10"
-                            value={content}
-                            onChange={(event) => setContent(event.target.value)}
-                        />
                     </Col>
                 </FormGroup>
             </Form>

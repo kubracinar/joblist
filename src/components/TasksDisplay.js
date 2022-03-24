@@ -27,27 +27,20 @@ const TasksDisplay = () => {
 
     const setColor = (index) => {
         const list = [...taskList];
-        if (!list[index].isCompleted) {
+
             switch (list[index].priority) {
-                case "low":
+                case "normal":
                     return "info";
-                case "medium":
+                case "onemli":
                     return "warning";
-                case "high":
+                case "acil":
                     return "danger";
                 default:
                     return "info";
             }
-        } else {
-            return "success";
-        }
+
     };
 
-    const setComplete = (index) => {
-        const list = [...taskList];
-        list[index] = { ...list[index], isCompleted: !list[index].isCompleted };
-        setTaskList(list);
-    };
 
     const changePriority = (event, index) => {
         const list = [...taskList];
@@ -88,11 +81,9 @@ const TasksDisplay = () => {
                             <option value="all" selected>
                                 All
                             </option>
-                            <option value="true">Completed</option>
-                            <option value="false">Pending</option>
-                            <option value="low">Low</option>
-                            <option value="medium">Medium</option>
-                            <option value="high">High</option>
+                            <option value="normal">Normal</option>
+                            <option value="onemli">Önemli</option>
+                            <option value="acil">Acil</option>
                         </Input>
                     </Col>
                 </FormGroup>
@@ -103,8 +94,7 @@ const TasksDisplay = () => {
                         ? taskList.map((task, taskIndex) => {
                             if (
                                 filter === "all" ||
-                                filter === task.priority ||
-                                filter === task.isCompleted.toString()
+                                filter === task.priority
                             ) {
                                 return (
                                     <ListGroupItem
@@ -112,13 +102,6 @@ const TasksDisplay = () => {
                                         key={taskIndex}
                                         color={setColor(taskIndex)}
                                     >
-                                        <Input
-                                            type="checkbox"
-                                            name="isCompleted"
-                                            id="isCompleted"
-                                            checked={task.isCompleted}
-                                            onClick={() => setComplete(taskIndex)}
-                                        />{" "}
                                         <div id="title">{task.name}</div>
                                         <Input
                                             type="select"
@@ -126,20 +109,20 @@ const TasksDisplay = () => {
                                             id="priority"
                                             onChange={(event) => changePriority(event, taskIndex)}
                                         >
-                                            <option value="low" selected={task.priority === "low"}>
-                                                low
+                                            <option value="acil" selected={task.priority === "acil"}>
+                                                Acil
                                             </option>
                                             <option
-                                                value="medium"
-                                                selected={task.priority === "medium"}
+                                                value="onemli"
+                                                selected={task.priority === "onemli"}
                                             >
-                                                medium
+                                                Önemli
                                             </option>
                                             <option
-                                                value="high"
-                                                selected={task.priority === "high"}
+                                                value="normal"
+                                                selected={task.priority === "normal"}
                                             >
-                                                high
+                                                Normal
                                             </option>
                                         </Input>
                                         <Button
