@@ -47,7 +47,7 @@ const TasksDisplay = () => {
         list[index] = { ...list[index], priority: event.target.value };
         setTaskList(list);
     };
-    const onOpenModal = (taskIndex) => setOpen(true);
+    const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
     const deleteTask = (index) => {
         const list = [...taskList];
@@ -59,10 +59,6 @@ const TasksDisplay = () => {
     const detailAdress = (index) => {
         history.push(`/detail/${index}`);
     };
-
-
-
-
     return (
         <div className="taskDisplay">
             <h3>Tasks:</h3>
